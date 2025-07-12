@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Business Tools - Echo AI Systems</title>
+    <meta name="description" content="Free tools to help your business grow online. Check your visibility, website speed, and competition.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .header h1 span:first-child {
+            color: #e2e8f0;
+        }
+        
+        .header h1 span:nth-child(2) {
+            color: #0EA5E9;
+        }
+        
+        .header h1 span:nth-child(3) {
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 0.875rem;
+            color: #0EA5E9;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .tool-card {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(14, 165, 233, 0.3);
+        }
+        
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tool-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .tool-description {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: linear-gradient(135deg, #6366F1, #8B5CF6);
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.3);
+        }
+        
+        /* Tool Interfaces - Full Width */
+        .tool-interface {
+            display: none;
+            background: rgba(15, 23, 42, 0.95);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin-top: 2rem;
+            text-align: left;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            width: 100%;
+            max-width: none;
+        }
+        
+        .tool-interface.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 0.5rem;
+            color: #e2e8f0;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #0EA5E9;
+        }
+        
+        /* Results - Full Width */
+        .results {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 1rem;
+            display: none;
+            width: 100%;
+            max-width: none;
+        }
+        
+        .results.show {
+            display: block;
+        }
+        
+        .result-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .result-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .result-label {
+            font-weight: 600;
+            color: #0EA5E9;
+            margin-bottom: 0.25rem;
+        }
+        
+        .result-value {
+            font-size: 1.125rem;
+        }
+        
+        .score-display {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .score-good {
+            color: #10B981;
+        }
+        
+        .score-medium {
+            color: #F59E0B;
+        }
+        
+        .score-poor {
+            color: #EF4444;
+        }
+        
+        .recommendations {
+            background: rgba(14, 165, 233, 0.1);
+            border-left: 4px solid #0EA5E9;
+            padding: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .recommendations h4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .recommendations ul {
+            list-style-position: inside;
+            color: #94a3b8;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #0EA5E9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .loading.show {
+            display: block;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #0EA5E9;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Back to home */
+        .back-home {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .back-home a {
+            color: #0EA5E9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tool-interface {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <p class="subtitle">FREE BUSINESS TOOLS</p>
+            <h1>
+                <span>See How Many Customers </span>
+                <span>You're Missing </span>
+                <span>Online</span>
+            </h1>
+        </header>
+        
+        <div class="tools-grid">
+            <!-- Business Visibility Checker -->
+            <div class="tool-card">
+                <div class="tool-icon">🔍</div>
+                <h2 class="tool-title">Business Visibility Checker</h2>
+                <p class="tool-description">See how often you appear in local searches and what customers find</p>
+                <button class="btn" onclick="showTool('visibility')">Check Now - Free</button>
+                
+                <div id="visibility-tool" class="tool-interface">
+                    <h3>Check Your Business Visibility</h3>
+                    <form id="visibility-form">
+                        <div class="form-group">
+                            <label>Business Name</label>
+                            <input type="text" name="businessName" required placeholder="Your Business Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Business Type</label>
+                            <select name="businessType" required>
+                                <option value="">Select your business type</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="retail">Retail Store</option>
+                                <option value="service">Service Business</option>
+                                <option value="contractor">Contractor</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>City</label>
+                            <input type="text" name="city" required placeholder="Your City">
+                        </div>
+                        <button type="submit" class="btn">Analyze Visibility</button>
+                    </form>
+                    
+                    <div class="loading" id="visibility-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Analyzing your online presence...</p>
+                    </div>
+                    
+                    <div class="results" id="visibility-results"></div>
+                    <a href="#" class="back-btn" onclick="hideTool('visibility'); return false;">&larr; Back to tools</a>
+                </div>
+            </div>
+            
+            <!-- Website Speed Test -->
+            <div class="tool-card">
+                <div class="tool-icon">⚡</div>
+                <h2 class="tool-title">Website Speed Test</h2>
+                <p class="tool-description">See if your website is losing customers because it's too slow</p>
+                <button class="btn" onclick="showTool('speed')">Test Speed</button>
+                
+                <div id="speed-tool" class="tool-interface">
+                    <h3>Test Your Website Speed</h3>
+                    <form id="speed-form">
+                        <div class="form-group">
+                            <label>Website URL</label>
+                            <input type="url" name="websiteUrl" required placeholder="https://yourbusiness.com">
+                        </div>
+                        <button type="submit" class="btn">Test Speed</button>
+                    </form>
+                    
+                    <div class="loading" id="speed-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Testing your website speed...</p>
+                    </div>
+                    
+                    <div class="results" id="speed-results"></div>
+                    <a href="#" class="back-btn" onclick="hideTool('speed'); return false;">&larr; Back to tools</a>
+                </div>
+            </div>
+            
+            <!-- Competition Report -->
+            <div class="tool-card">
+                <div class="tool-icon">🏆</div>
+                <h2 class="tool-title">Competition Report</h2>
+                <p class="tool-description">See what your competitors are doing online and how to beat them</p>
+                <button class="btn" onclick="showTool('competition')">Get Report</button>
+                
+                <div id="competition-tool" class="tool-interface">
+                    <h3>Analyze Your Competition</h3>
+                    <form id="competition-form">
+                        <div class="form-group">
+                            <label>Your Business Type</label>
+                            <select name="businessType" required>
+                                <option value="">Select your business type</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="retail">Retail Store</option>
+                                <option value="service">Service Business</option>
+                                <option value="contractor">Contractor</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Your City</label>
+                            <input type="text" name="city" required placeholder="Your City">
+                        </div>
+                        <div class="form-group">
+                            <label>Main Competitor (Optional)</label>
+                            <input type="text" name="competitor" placeholder="Competitor Business Name">
+                        </div>
+                        <button type="submit" class="btn">Analyze Competition</button>
+                    </form>
+                    
+                    <div class="loading" id="competition-loading">
+                        <div class="loading-spinner"></div>
+                        <p>Analyzing your competition...</p>
+                    </div>
+                    
+                    <div class="results" id="competition-results"></div>
+                    <a href="#" class="back-btn" onclick="hideTool('competition'); return false;">&larr; Back to tools</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="back-home">
+            <a href="index.html">&larr; Back to Echo AI Systems</a>
+        </div>
+    </div>
+    
+    <!-- External JavaScript file with proper event handling -->
+    <script src="js/tools.js"></script>
+</body>
+</html>

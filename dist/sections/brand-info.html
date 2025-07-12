@@ -1,0 +1,212 @@
+<!-- Brand Info Section Main Container - Mobile First -->
+<div class="section-header">
+    <h1>Brand Information</h1>
+    <p>Manage your business details, brand assets, and company information.</p>
+</div>
+
+<div class="tab-navigation">
+    <button class="tab-button active" onclick="showTab('business-details')">Business Details</button>
+    <button class="tab-button" onclick="showTab('contact-info')">Contact Information</button>
+    <button class="tab-button" onclick="showTab('brand-assets')">Brand Assets</button>
+    <button class="tab-button" onclick="showTab('certifications')">Certifications</button>
+</div>
+
+<!-- Tab Content Container -->
+<div id="brand-info-tabs">
+    <!-- Tabs will be loaded here dynamically -->
+</div>
+
+<!-- Load the brand assets upload script -->
+<script src="/js/brand-assets-upload.js"></script>
+
+<script>
+// Store loaded tabs to avoid reloading
+const loadedTabs = {};
+
+// Load tab content dynamically
+async function loadTabContent(tabName) {
+    if (loadedTabs[tabName]) {
+        return loadedTabs[tabName];
+    }
+    
+    try {
+        const response = await fetch(`/sections/brand-info/${tabName}.html`);
+        if (!response.ok) throw new Error('Failed to load tab');
+        
+        const content = await response.text();
+        loadedTabs[tabName] = content;
+        return content;
+    } catch (error) {
+        console.error(`Error loading ${tabName} tab:`, error);
+        return '<div class="error-state">Failed to load content. Please refresh the page.</div>';
+    }
+}
+
+// Show specific tab
+async function showTab(tabName) {
+    // Update button states
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Find the clicked button
+    const clickedButton = event?.target || document.querySelector(`[onclick="showTab('${tabName}')"]`);
+    if (clickedButton) {
+        clickedButton.classList.add('active');
+    }
+    
+    // Load and display tab content
+    const container = document.getElementById('brand-info-tabs');
+    container.innerHTML = '<div class="loading-state">Loading...</div>';
+    
+    const content = await loadTabContent(tabName);
+    container.innerHTML = content;
+    
+    // Initialize tab-specific features
+    initializeTabFeatures(tabName);
+}
+
+// Initialize features for specific tabs
+function initializeTabFeatures(tabName) {
+    switch(tabName) {
+        case 'contact-info':
+            if (typeof loadContactInfo === 'function') {
+                loadContactInfo();
+            }
+            break;
+        case 'brand-assets':
+            if (window.brandAssetsUpload && window.brandAssetsUpload.loadBrandAssets) {
+                window.brandAssetsUpload.loadBrandAssets();
+            }
+            break;
+        case 'certifications':
+            if (window.brandAssetsUpload && window.brandAssetsUpload.loadBrandAssets) {
+                window.brandAssetsUpload.loadBrandAssets();
+            }
+            break;
+    }
+}
+
+// Load initial tab on page load
+document.addEventListener('DOMContentLoaded', async () => {
+    await showTab('business-details');
+});
+
+// Make showTab globally available
+window.showTab = showTab;
+</script>
+
+<style>
+/* Tab Navigation - Mobile First */
+.tab-navigation {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 0;
+}
+
+.tab-navigation::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-button {
+    padding: 0.75rem 1rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.875rem;
+    border-radius: 0;
+    min-width: auto;
+}
+
+.tab-button:hover {
+    color: var(--text-primary);
+    background: var(--primary-light);
+}
+
+.tab-button.active {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--primary);
+}
+
+.loading-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+.error-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--danger);
+    font-size: 0.875rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+/* Responsive adjustments */
+@media (min-width: 576px) {
+    .tab-button {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .tab-navigation {
+        overflow-x: visible;
+        gap: 0;
+    }
+    
+    .tab-button {
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .loading-state {
+        padding: 3rem;
+    }
+    
+    .error-state {
+        padding: 3rem;
+    }
+}
+
+/* Ensure tab content is visible */
+#brand-info-tabs {
+    width: 100%;
+    min-height: 200px;
+}
+
+/* Tab content specific styles */
+.tab-content {
+    width: 100%;
+}
+
+.tab-content.active {
+    display: block;
+}
+</style>

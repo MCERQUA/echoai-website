@@ -1,0 +1,472 @@
+<!-- Overview Section - Mobile First Design -->
+<div class="section-header">
+    <h1>Dashboard Overview</h1>
+    <p>Welcome back! Here's a snapshot of your business data.</p>
+</div>
+
+<div class="overview-grid">
+    <!-- Data Completeness Card -->
+    <div class="completeness-card">
+        <div class="card-header">
+            <h3>Data Completeness</h3>
+            <button class="btn-secondary" onclick="loadSection('brand-info')">Complete Profile</button>
+        </div>
+        <div class="completeness-meter">
+            <div class="completeness-value" data-field="completeness">0%</div>
+            <div class="completeness-bar">
+                <div class="completeness-fill" data-field="completeness-bar" style="width: 0%"></div>
+            </div>
+            <p class="completeness-description">Your business profile is <span data-field="completeness">0</span>% complete</p>
+        </div>
+    </div>
+    
+    <!-- Quick Stats Grid -->
+    <div class="quick-stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" data-field="total-reviews">0</div>
+                <div class="stat-label">Total Reviews</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" data-field="average-rating">N/A</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" data-field="social-followers">0</div>
+                <div class="stat-label">Social Followers</div>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="2" y1="12" x2="22" y2="12"/>
+                    <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
+                </svg>
+            </div>
+            <div class="stat-content">
+                <div class="stat-value" data-field="website-visits">0</div>
+                <div class="stat-label">Website Visits</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Research Status -->
+<div class="section-card">
+    <div class="card-header">
+        <h2>AI Research Status</h2>
+        <button class="btn-primary" onclick="triggerAIResearch('full_audit')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+            Start Full Audit
+        </button>
+    </div>
+    <div class="research-status">
+        <div class="research-stat">
+            <div class="research-count pending" data-field="pending-research">0</div>
+            <div class="research-label">Pending</div>
+        </div>
+        <div class="research-stat">
+            <div class="research-count in-progress" data-field="in-progress-research">0</div>
+            <div class="research-label">In Progress</div>
+        </div>
+        <div class="research-stat">
+            <div class="research-count completed" data-field="completed-research">0</div>
+            <div class="research-label">Completed</div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity -->
+<div class="section-card">
+    <div class="card-header">
+        <h2>Recent Activity</h2>
+        <a href="#" class="link-text">View All</a>
+    </div>
+    <div class="activity-list" id="recent-activity">
+        <div class="activity-item">
+            <div class="activity-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2v4m0 12v4m10-10h-4M6 12H2"/>
+                </svg>
+            </div>
+            <div class="activity-content">
+                <p>No recent activity</p>
+                <span class="activity-time">Start by completing your profile</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Action Items -->
+<div class="section-card">
+    <div class="card-header">
+        <h2>Action Items</h2>
+        <span class="badge">3 pending</span>
+    </div>
+    <div class="action-list">
+        <div class="action-item">
+            <input type="checkbox" id="action1">
+            <label for="action1">Complete business information</label>
+        </div>
+        <div class="action-item">
+            <input type="checkbox" id="action2">
+            <label for="action2">Upload brand logo</label>
+        </div>
+        <div class="action-item">
+            <input type="checkbox" id="action3">
+            <label for="action3">Connect social media accounts</label>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Overview Grid - Mobile First */
+.overview-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Completeness Card */
+.completeness-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.completeness-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.completeness-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.completeness-meter {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.completeness-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.completeness-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.completeness-fill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.completeness-description {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Quick Stats Grid */
+.quick-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.stat-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary-light);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.stat-content {
+    width: 100%;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+    line-height: 1.1;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    line-height: 1.3;
+}
+
+/* Section Cards */
+.section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.card-header h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Research Status */
+.research-status {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    text-align: center;
+}
+
+.research-stat {
+    padding: 0.5rem;
+}
+
+.research-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    line-height: 1.1;
+}
+
+.research-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.research-count.pending { color: #F59E0B; }
+.research-count.in-progress { color: #3B82F6; }
+.research-count.completed { color: #10B981; }
+
+/* Activity List */
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.activity-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.activity-icon {
+    width: 28px;
+    height: 28px;
+    background: var(--background);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.activity-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.activity-content p {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+}
+
+.activity-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* Action List */
+.action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.action-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.action-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+}
+
+.action-item label {
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1.4;
+    flex: 1;
+}
+
+/* Responsive Design */
+@media (min-width: 576px) {
+    .overview-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .quick-stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .completeness-value {
+        font-size: 2.5rem;
+    }
+    
+    .stat-value {
+        font-size: 1.75rem;
+    }
+    
+    .stat-icon {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .section-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .overview-grid {
+        grid-template-columns: 1fr 2fr;
+        align-items: start;
+    }
+    
+    .completeness-card {
+        grid-row: span 1;
+    }
+    
+    .quick-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .research-status {
+        gap: 1.5rem;
+    }
+    
+    .research-count {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .overview-grid {
+        grid-template-columns: 1fr 3fr;
+    }
+    
+    .quick-stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Loading states */
+.loading-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Link styles */
+.link-text {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.link-text:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+</style>

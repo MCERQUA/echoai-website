@@ -1,0 +1,42 @@
+{
+  "env": {
+    "ECHO_MODE": "active",
+    "ECHO_STARTUP": "enabled",
+    "ECHO_SLACK_CHANNEL": "C0943NFUBDF"
+  },
+  "permissions": {
+    "allow": [
+      "*",
+      "Bash(mkdir:*)",
+      "Bash(find:*)",
+      "Bash(mv:*)",
+      "Bash(claude doctor)"
+    ],
+    "deny": [],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "session_start",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '🚀 Echo AI Session Starting - Auto-executing startup sequence...' && echo '/startup' > /tmp/echo_startup_trigger"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f /tmp/echo_startup_trigger ] && [ \"$CLAUDE_TOOL_NAME\" != \"startup\" ]; then rm /tmp/echo_startup_trigger && echo 'ECHO_STARTUP_REQUESTED'; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services - Echo AI Systems | Done-For-You Online Marketing</title>
+    <meta name="description" content="From content creation to website design, social media management to AI tools - we handle all your online marketing so you can focus on your business.">
+    
+    <!-- Modern Font Stack -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/services.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="images/echo-favicon.svg">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header" id="header">
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-icon">
+                        <svg viewBox="0 0 40 40" width="40" height="40">
+                            <defs>
+                                <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:var(--accent-primary);stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:var(--accent-secondary);stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <circle cx="20" cy="20" r="18" fill="url(#logo-gradient)"/>
+                            <text x="20" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="bold">E</text>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Echo<span class="ai-badge">AI</span></span>
+                </a>
+            </div>
+
+            <nav class="main-nav" id="mainNav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="index.html" class="nav-link" data-hover="Home">Home</a></li>
+                    <li class="nav-item"><a href="services.html" class="nav-link active" data-hover="Services">Services</a></li>
+                    <li class="nav-item"><a href="portfolio.html" class="nav-link" data-hover="Success Stories">Success Stories</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link" data-hover="About">About</a></li>
+                    <li class="nav-item"><a href="index.html#contact" class="nav-link" data-hover="Contact">Contact</a></li>
+                    <li class="nav-item"><a href="login.html" class="nav-link" data-hover="Client Login">Client Login</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                <a href="index.html#contact" class="cta-button primary">
+                    <span>Get Started</span>
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M5 12h14m-7-7l7 7-7 7"/>
+                    </svg>
+                </a>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="services-hero">
+        <div class="hero-background">
+            <div class="grid-pattern"></div>
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+        
+        <div class="container">
+            <div class="hero-content">
+                <span class="section-label">Our Services</span>
+                <h1 class="hero-title">
+                    We Handle The Tech <span class="gradient-text">You Handle The Business</span>
+                </h1>
+                <p class="hero-description">
+                    Every service is customized to your specific needs. No one-size-fits-all packages. 
+                    Just real solutions that bring more customers to your business.
+                </p>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="tools.html" class="cta-button secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <span>Try Our Free Business Tools</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services-section">
+        <div class="container">
+            <!-- Content Creation Services -->
+            <div class="service-category">
+                <h2 class="category-title">📝 Content Creation Services</h2>
+                <p class="category-description">Professional content that speaks your customer's language</p>
+                
+                <div class="service-card" id="content">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" width="64" height="64">
+                                <rect x="12" y="12" width="40" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20 24h24m-24 8h20m-20 8h24" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="service-title">Blog Articles & Social Media Posts</h3>
+                            <p class="service-tagline">Content that ranks in search and engages customers</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            We create professional blog articles and social media content that gets your 
+                            business found online. Every piece is optimized for search engines and written 
+                            to convert readers into customers.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>SEO-optimized blog writing</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Daily social media content</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Consistent posting schedules</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Platform-specific optimization</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Brand voice consistency</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Call-to-action integration</span>
+                            </div>
+                        </div>
+                        
+                        <a href="index.html#contact" class="service-cta">
+                            <span>Start Creating Content</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M5 12h14m-7-7l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design & Visual Services -->
+            <div class="service-category">
+                <h2 class="category-title">🎨 Design & Visual Services</h2>
+                <p class="category-description">Professional designs that make your business stand out</p>
+                
+                <div class="service-card" id="design">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" width="64" height="64">
+                                <rect x="8" y="12" width="48" height="36" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 24h48" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="16" cy="18" r="2" fill="currentColor"/>
+                                <circle cx="24" cy="18" r="2" fill="currentColor"/>
+                                <circle cx="32" cy="18" r="2" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="service-title">Website Design & Graphics</h3>
+                            <p class="service-tagline">Beautiful websites and visuals that convert visitors</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Get a professional website that looks amazing and brings in customers 24/7. 
+                            Plus all the graphics, videos, and visual content your business needs to 
+                            shine online.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Custom website design</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Mobile-responsive sites</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Logo and brand design</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Marketing graphics</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Promotional videos</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Ongoing maintenance</span>
+                            </div>
+                        </div>
+                        
+                        <a href="index.html#contact" class="service-cta">
+                            <span>Get a New Website</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M5 12h14m-7-7l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Digital Services -->
+            <div class="service-category">
+                <h2 class="category-title">🚀 Advanced Digital Services</h2>
+                <p class="category-description">Comprehensive solutions that work while you sleep</p>
+                
+                <div class="service-card" id="social-media">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" width="64" height="64">
+                                <circle cx="20" cy="20" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="44" cy="20" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="20" cy="44" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="44" cy="44" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M28 20h8m-16 24h8m16-24v8m0 16v-8" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="service-title">Social Media Management</h3>
+                            <p class="service-tagline">Complete management of all your social accounts</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Let us handle your entire social media presence. We post daily, respond to 
+                            customers, grow your following, and turn social media into a customer 
+                            generation machine.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Complete account management</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Content planning & scheduling</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Community engagement</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Analytics & reporting</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Growth strategy</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Lead generation</span>
+                            </div>
+                        </div>
+                        
+                        <a href="index.html#contact" class="service-cta">
+                            <span>Grow Your Social Media</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M5 12h14m-7-7l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card" id="brand-development">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" width="64" height="64">
+                                <path d="M32 16l8 8h-16z" fill="currentColor"/>
+                                <rect x="28" y="24" width="8" height="24" fill="currentColor"/>
+                                <path d="M20 48h24" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="service-title">Brand Development</h3>
+                            <p class="service-tagline">Create a brand that customers remember</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Build a complete brand identity that sets you apart from competitors. 
+                            From logos to messaging, we create everything you need to look professional 
+                            and attract the right customers.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Complete brand identity</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Brand voice & messaging</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Brand guidelines</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Market positioning</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Brand assets</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Marketing materials</span>
+                            </div>
+                        </div>
+                        
+                        <a href="index.html#contact" class="service-cta">
+                            <span>Build Your Brand</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M5 12h14m-7-7l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card" id="ai-representatives">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" width="64" height="64">
+                                <circle cx="32" cy="24" r="12" fill="none" stroke="currentColor" stroke-width="2"/>
+                                <path d="M32 36v12m-8 0h16" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="26" cy="22" r="2" fill="currentColor"/>
+                                <circle cx="38" cy="22" r="2" fill="currentColor"/>
+                                <path d="M26 28c0 3.3 2.7 6 6 6s6-2.7 6-6" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="service-title">AI Brand Representatives</h3>
+                            <p class="service-tagline">Smart customer service that never sleeps</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Get an AI assistant that knows your business inside and out. It answers 
+                            customer questions, books appointments, and captures leads 24/7 - even 
+                            when you're sleeping.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>24/7 customer support</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Appointment booking</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Lead qualification</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Personalized responses</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Multi-platform support</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Automated follow-up</span>
+                            </div>
+                        </div>
+                        
+                        <a href="index.html#contact" class="service-cta">
+                            <span>Get Your AI Assistant</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M5 12h14m-7-7l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card" id="3d-worlds">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <svg viewBox="0 0 64 64" width="64" height="64">
+                                <path d="M32 12v40m-20-10l20-10 20 10m-20-20l20 10v20l-20 10-20-10v-20z" 
+                                      fill="none" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="service-title">3D Immersive Experiences</h3>
+                            <p class="service-tagline">Stand out with cutting-edge virtual experiences</p>
+                        </div>
+                    </div>
+                    
+                    <div class="service-content">
+                        <p class="service-description">
+                            Create virtual showrooms, interactive product demos, and branded games 
+                            that wow your customers. Give them an experience they'll never forget 
+                            and share with everyone they know.
+                        </p>
+                        
+                        <div class="service-features">
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Virtual showrooms</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Interactive demos</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Branded games</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Gamified marketing</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Virtual events</span>
+                            </div>
+                            <div class="feature-item">
+                                <svg viewBox="0 0 24 24" width="24" height="24">
+                                    <path d="M9 11l3 3L22 4" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                <span>Product visualization</span>
+                            </div>
+                        </div>
+                        
+                        <a href="index.html#contact" class="service-cta">
+                            <span>Create Virtual Experience</span>
+                            <svg viewBox="0 0 24 24" width="20" height="20">
+                                <path d="M5 12h14m-7-7l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">How It Works</span>
+                <h2 class="section-title">
+                    Simple Process, <span class="gradient-text">Amazing Results</span>
+                </h2>
+            </div>
+            
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h3>Tell Us Your Goals</h3>
+                    <p>Share what you want to achieve. More customers? Better reputation? We listen and understand.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h3>We Create Your Plan</h3>
+                    <p>Get a custom strategy designed for your business, your market, and your budget.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h3>Watch It Come to Life</h3>
+                    <p>We handle all the technical work while you focus on running your business.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h3>Grow Your Business</h3>
+                    <p>See more customers, make more money, and beat your competition - guaranteed.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="services-cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Get More Customers?</h2>
+                <p class="cta-description">
+                    Let's create a custom plan to grow your business online. Free consultation, no tech talk, just results.
+                </p>
+                <a href="index.html#contact" class="cta-button large">
+                    <span>Get Your Free Business Growth Plan</span>
+                    <div class="button-glow"></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg viewBox="0 0 40 40" width="40" height="40">
+                            <circle cx="20" cy="20" r="18" fill="var(--accent-primary)"/>
+                            <text x="20" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="bold">E</text>
+                        </svg>
+                        <span>Echo AI Systems</span>
+                    </div>
+                    <p class="footer-tagline">Helping small businesses succeed online</p>
+                    <div class="footer-contact">
+                        <a href="mailto:echoaisystems@gmail.com">echoaisystems@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#content">Content Creation</a></li>
+                            <li><a href="#design">Website Design</a></li>
+                            <li><a href="#social-media">Social Media</a></li>
+                            <li><a href="#ai-representatives">AI Assistants</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="portfolio.html">Success Stories</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                            <li><a href="login.html">Client Login</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="tools.html">Free Tools</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Support</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Echo AI Systems. All rights reserved.</p>
+                <div class="footer-stats">
+                    <span>500+ Small Businesses Helped</span>
+                    <span class="separator">•</span>
+                    <span>No Tech Experience Required</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

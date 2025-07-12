@@ -1,0 +1,707 @@
+<!-- Directory Citations Tab -->
+<div class="tab-content">
+    <div class="section-card">
+        <div class="card-header">
+            <h2>Directory Citations</h2>
+            <button class="btn-primary" onclick="openAddCitationModal()">+ Add Citation</button>
+        </div>
+        
+        <p class="section-description">Track your business listings across online directories and citation sites.</p>
+        
+        <!-- Citations Table -->
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Directory Name</th>
+                        <th>URL</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="citations-tbody">
+                    <tr class="empty-row">
+                        <td colspan="6">Loading citations...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- Add/Edit Citation Modal -->
+    <div id="citation-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="citation-modal-title">Add Directory Citation</h3>
+                <button class="modal-close" onclick="closeCitationModal()">×</button>
+            </div>
+            
+            <form id="citation-form" onsubmit="saveCitation(event)">
+                <div class="form-group">
+                    <label for="directory-name">Directory Name *</label>
+                    <input type="text" id="directory-name" required placeholder="e.g., Yelp, Yellow Pages">
+                </div>
+                
+                <div class="form-group">
+                    <label for="directory-url">Directory URL</label>
+                    <input type="url" id="directory-url" placeholder="https://...">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="directory-username">Username</label>
+                        <input type="text" id="directory-username" placeholder="Login username">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="directory-password">Password</label>
+                        <input type="password" id="directory-password" placeholder="Login password">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="directory-status">Status</label>
+                    <select id="directory-status">
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="inactive">Inactive</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeCitationModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Citation</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+let editingCitationId = null;
+let citationsData = [];
+
+// Initialize when tab loads
+console.log('Citations tab script loaded');
+
+// Load citations data from Supabase
+async function loadCitationsData() {
+    console.log('Loading citations data...');
+    
+    if (!window.user) {
+        console.log('No user logged in');
+        showEmptyState();
+        return;
+    }
+    
+    try {
+        // Try to load from Supabase
+        const { data, error } = await window.supabase
+            .from('directory_citations')
+            .select('*')
+            .eq('client_id', window.user.id)
+            .order('created_at', { ascending: false });
+            
+        if (error) {
+            console.error('Error loading citations:', error);
+            if (error.message?.includes('relation') && error.message?.includes('does not exist')) {
+                showTableNotExistsError();
+            } else {
+                showErrorState();
+            }
+            return;
+        }
+        
+        citationsData = data || [];
+        console.log('Loaded citations:', citationsData);
+        displayCitations();
+        
+    } catch (error) {
+        console.error('Error in loadCitationsData:', error);
+        showErrorState();
+    }
+}
+
+// Display citations in table
+function displayCitations() {
+    const tbody = document.getElementById('citations-tbody');
+    
+    if (!tbody) {
+        console.error('Citations tbody not found');
+        return;
+    }
+    
+    if (citationsData.length === 0) {
+        showEmptyState();
+        return;
+    }
+    
+    const rows = citationsData.map(citation => {
+        const statusClass = `status-${citation.status || 'pending'}`;
+        
+        return `
+            <tr>
+                <td>${escapeHtml(citation.site_name || citation.directory_name || '')}</td>
+                <td>
+                    ${citation.live_url || citation.directory_url
+                        ? `<a href="${citation.live_url || citation.directory_url}" target="_blank" class="link">View →</a>` 
+                        : '-'}
+                </td>
+                <td>${escapeHtml(citation.username || '-')}</td>
+                <td class="password-cell">
+                    <span class="password-hidden">••••••••</span>
+                    ${citation.password ? `<button class="btn-tiny" onclick="togglePassword(this, '${citation.id}')">Show</button>` : '-'}
+                </td>
+                <td>
+                    <span class="status ${statusClass}">${formatStatus(citation.status)}</span>
+                </td>
+                <td class="actions">
+                    <button class="btn-icon" onclick="editCitation('${citation.id}')" title="Edit">✏️</button>
+                    <button class="btn-icon" onclick="deleteCitation('${citation.id}')" title="Delete">🗑️</button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+    
+    tbody.innerHTML = rows;
+}
+
+// Show empty state
+function showEmptyState() {
+    const tbody = document.getElementById('citations-tbody');
+    if (tbody) {
+        tbody.innerHTML = `
+            <tr class="empty-row">
+                <td colspan="6">
+                    <div class="empty-state">
+                        <p>No directory citations added yet.</p>
+                        <p>Click "Add Citation" to start tracking your business listings.</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+}
+
+// Show error state
+function showErrorState() {
+    const tbody = document.getElementById('citations-tbody');
+    if (tbody) {
+        tbody.innerHTML = `
+            <tr class="error-row">
+                <td colspan="6">
+                    <div class="error-state">
+                        <p>Failed to load citations.</p>
+                        <p>Please refresh the page and try again.</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+}
+
+// Show table not exists error
+function showTableNotExistsError() {
+    const tbody = document.getElementById('citations-tbody');
+    if (tbody) {
+        tbody.innerHTML = `
+            <tr class="error-row">
+                <td colspan="6">
+                    <div class="error-state">
+                        <p><strong>Database table not found.</strong></p>
+                        <p>The citations feature requires database setup.</p>
+                        <p>Please run the SQL schema in your Supabase dashboard:</p>
+                        <p><code>docs/citations_table.sql</code></p>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+}
+
+// Toggle password visibility
+function togglePassword(button, citationId) {
+    const cell = button.parentElement;
+    const passwordSpan = cell.querySelector('.password-hidden');
+    
+    if (passwordSpan.textContent === '••••••••') {
+        // Show password
+        const citation = citationsData.find(c => c.id === citationId);
+        if (citation && citation.password) {
+            passwordSpan.textContent = citation.password;
+            button.textContent = 'Hide';
+        }
+    } else {
+        // Hide password
+        passwordSpan.textContent = '••••••••';
+        button.textContent = 'Show';
+    }
+}
+
+// Open add citation modal
+function openAddCitationModal() {
+    editingCitationId = null;
+    document.getElementById('citation-modal-title').textContent = 'Add Directory Citation';
+    document.getElementById('citation-form').reset();
+    document.getElementById('citation-modal').style.display = 'flex';
+}
+
+// Edit citation
+function editCitation(citationId) {
+    editingCitationId = citationId;
+    const citation = citationsData.find(c => c.id === citationId);
+    
+    if (!citation) return;
+    
+    document.getElementById('citation-modal-title').textContent = 'Edit Directory Citation';
+    document.getElementById('directory-name').value = citation.site_name || citation.directory_name || '';
+    document.getElementById('directory-url').value = citation.live_url || citation.directory_url || '';
+    document.getElementById('directory-username').value = citation.username || '';
+    document.getElementById('directory-password').value = citation.password || '';
+    document.getElementById('directory-status').value = citation.status || 'pending';
+    
+    document.getElementById('citation-modal').style.display = 'flex';
+}
+
+// Delete citation
+async function deleteCitation(citationId) {
+    if (!confirm('Are you sure you want to delete this citation?')) return;
+    
+    try {
+        const { error } = await window.supabase
+            .from('directory_citations')
+            .delete()
+            .eq('id', citationId);
+            
+        if (error) throw error;
+        
+        showNotification('Citation deleted successfully', 'success');
+        await loadCitationsData();
+        
+    } catch (error) {
+        console.error('Error deleting citation:', error);
+        showNotification('Failed to delete citation', 'error');
+    }
+}
+
+// Close modal
+function closeCitationModal() {
+    document.getElementById('citation-modal').style.display = 'none';
+    editingCitationId = null;
+}
+
+// Save citation
+async function saveCitation(event) {
+    event.preventDefault();
+    
+    const citationData = {
+        client_id: window.user.id,
+        site_name: document.getElementById('directory-name').value,
+        live_url: document.getElementById('directory-url').value || null,
+        username: document.getElementById('directory-username').value || null,
+        password: document.getElementById('directory-password').value || null,
+        status: document.getElementById('directory-status').value
+    };
+    
+    try {
+        if (editingCitationId) {
+            // Update existing
+            const { error } = await window.supabase
+                .from('directory_citations')
+                .update(citationData)
+                .eq('id', editingCitationId);
+                
+            if (error) throw error;
+            showNotification('Citation updated successfully', 'success');
+        } else {
+            // Insert new
+            const { error } = await window.supabase
+                .from('directory_citations')
+                .insert([citationData]);
+                
+            if (error) throw error;
+            showNotification('Citation added successfully', 'success');
+        }
+        
+        closeCitationModal();
+        await loadCitationsData();
+        
+    } catch (error) {
+        console.error('Error saving citation:', error);
+        showNotification('Failed to save citation', 'error');
+    }
+}
+
+// Format status
+function formatStatus(status) {
+    const statusMap = {
+        'active': 'Active',
+        'pending': 'Pending',
+        'inactive': 'Inactive'
+    };
+    return statusMap[status] || status;
+}
+
+// Escape HTML
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+    if (window.showNotification) {
+        window.showNotification(message, type);
+    } else {
+        console.log(`${type}: ${message}`);
+    }
+}
+
+// Close modal on outside click
+document.getElementById('citation-modal')?.addEventListener('click', (e) => {
+    if (e.target.id === 'citation-modal') {
+        closeCitationModal();
+    }
+});
+
+// Make functions globally available
+window.loadCitationsData = loadCitationsData;
+window.openAddCitationModal = openAddCitationModal;
+window.editCitation = editCitation;
+window.deleteCitation = deleteCitation;
+window.closeCitationModal = closeCitationModal;
+window.saveCitation = saveCitation;
+window.togglePassword = togglePassword;
+
+// Load data when script loads
+loadCitationsData();
+</script>
+
+<style>
+/* Section card styling */
+.section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.section-description {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+/* Table styling */
+.table-container {
+    overflow-x: auto;
+    margin: -1.5rem;
+    margin-top: 0;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.data-table th {
+    background: var(--background);
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.data-table tr:hover {
+    background: var(--background);
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Password cell */
+.password-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.password-hidden {
+    font-family: monospace;
+}
+
+/* Links */
+.link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* Status badges */
+.status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.status-active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-inactive {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+/* Action buttons */
+.actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.btn-icon:hover {
+    background: var(--border);
+}
+
+.btn-tiny {
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-tiny:hover {
+    background: var(--background);
+}
+
+/* Empty and error states */
+.empty-row td,
+.error-row td {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-state,
+.error-state {
+    color: var(--text-muted);
+}
+
+.error-state {
+    color: var(--danger);
+}
+
+.empty-state p,
+.error-state p {
+    margin: 0.5rem 0;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.modal-content {
+    background: var(--surface);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-muted);
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: var(--text-primary);
+}
+
+/* Form styles */
+#citation-form {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-primary);
+    font-size: 0.875rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.btn-secondary {
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--background);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .table-container {
+        margin: -1rem;
+        margin-top: 0;
+    }
+    
+    .data-table {
+        font-size: 0.875rem;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 0.5rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .card-header .btn-primary {
+        width: 100%;
+    }
+}
+</style>

@@ -1,0 +1,14 @@
+[build]
+  # This will be your default build command
+  command = ""
+  # This is the directory that you want to publish
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "16"
+
+# Redirect paths to index for SPA behavior
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
